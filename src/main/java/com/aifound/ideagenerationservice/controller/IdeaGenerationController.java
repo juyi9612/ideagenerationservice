@@ -1,6 +1,7 @@
 package com.aifound.ideagenerationservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.ui.Model;
@@ -15,6 +16,9 @@ public class IdeaGenerationController {
     
 	private final IdeaService ideaService;
 
+	@Value("${cosmosdb.uri}")
+    private String uri;
+
 	@Autowired
     public IdeaGenerationController(IdeaService ideaService) {
         this.ideaService = ideaService;
@@ -27,8 +31,8 @@ public class IdeaGenerationController {
 
 	@GetMapping("admin/api/v1/greeting")
 	public String greetingh(@RequestParam(value = "name", defaultValue = "World") String name) throws Exception {
-		this.ideaService.cookIdeas();
-		return "Hello, " + name;
+		// this.ideaService.cookIdeas();
+		return "Hello, " + name + this.uri;
 	}
 
 	@GetMapping("api/v1/user")

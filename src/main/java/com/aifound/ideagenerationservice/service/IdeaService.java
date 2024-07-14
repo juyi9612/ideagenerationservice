@@ -33,25 +33,31 @@ public class IdeaService {
 
     public void cookIdeas() throws Exception {
         Map<String, List<String>> domains = ideaDomainsConfig.getDomain();
+        HttpClient client = HttpClient.newHttpClient();
+
         for (Map.Entry<String, List<String>> entry : domains.entrySet()) {
             String domain = entry.getKey();
             List<String> topics = entry.getValue();
             for (String topic : topics) {
                 System.out.println("Topic: " + topic);
-                IdeaDto ideaDto = this.getIdeaByTopic(topic);
-                ModelMapper modelMapper = new ModelMapper();
-                IdeaEntity entity = modelMapper.map(ideaDto, IdeaEntity.class);
-                UUID uuid = UUID.randomUUID();
-                entity.setId(uuid.toString());
-                entity.setDomain(IdeaDomain.valueOf(domain));
-                entity.setTier(1);
-                ideaRepository.save(entity);
+                try {
+                    IdeaDto ideaDto = this.getIdeaByTopic(topic, client);
+                    ModelMapper modelMapper = new ModelMapper();
+                    IdeaEntity entity = modelMapper.map(ideaDto, IdeaEntity.class);
+                    UUID uuid = UUID.randomUUID();
+                    entity.setId(uuid.toString());
+                    entity.setDomain(IdeaDomain.valueOf(domain));
+                    entity.setTier(1);
+                    ideaRepository.save(entity);
+                } catch(Exception e) {
+                    System.out.println("!!!!!!Failed topic: " + topic);
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
 
-    private IdeaDto getIdeaByTopic(String topic) throws Exception{
-        HttpClient client = HttpClient.newHttpClient();
+    private IdeaDto getIdeaByTopic(String topic, HttpClient client) throws Exception{
         String jsonBody = String.format("{\"question\":\"%s\"}", topic);
         String serviceUrl = "https://flowise-np5j.onrender.com/api/v1/prediction/8efbdd5b-ba78-4856-b492-9188b5a673ba";
         HttpRequest request = HttpRequest.newBuilder()
