@@ -11,6 +11,7 @@
 	<groupId>com.aifound</groupId>
 	<artifactId>ideagenerationservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>ideagenerationservice</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
