@@ -108,6 +108,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		
  
    <!-- <dependency>
      <groupId>org.springframework.boot</groupId>
@@ -121,6 +123,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
 			</plugin>
 		</plugins>
 	</build>
