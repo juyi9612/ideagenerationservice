@@ -89,5 +89,5 @@ jobs:
         with:
           app-name: 'IdeaGenerationService'
           slot-name: 'Production'
-          package: '**/target/*.war'
+          package: '*.war'
           
