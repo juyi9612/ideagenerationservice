@@ -30,14 +30,7 @@ jobs:
         with:
           java-version: '21.0.2'
           distribution: 'microsoft'
-      # cosmosdb.uri=${cosmosdb_uri}
-      # cosmosdb.key=${cosmosdb_key}
-      # cosmosdb.databasename=${cosmosdb_dbname}
-      # okta:
-      #   oauth2:
-      #     issuer: ${auth0_issuer}
-      #     client-id: ${auth0_issuer}
-      #     client-secret: 
+          
       - name: Configure application-prod.properties
         run: |
           echo "cosmosdb.uri=$COSMOSDB_URI" >> src/main/resources/application-prod.properties
@@ -60,6 +53,7 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.war'
+      
 
   deploy:
     runs-on: ubuntu-latest
@@ -83,6 +77,15 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7C70091DF417438F975E03B0B18F5B2F }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8B5AAA09C99F4FD385F68B8FF7D8C901 }}
 
+      - name: mkdir
+        run: |
+          mkdir -p /home/tomcat/lib
+          mkdir -p /home/site/libs
+          mkdir -p /usr/local/appservice/jdbc/azure-identity
+          mkdir -p /usr/local/appservice/jdbc/mysql
+          mkdir -p /usr/local/appservice/jdbc/postgresql
+          mkdir -p /usr/local/appservice/jdbc/sqlserver
+      
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
