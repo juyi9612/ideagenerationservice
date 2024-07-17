@@ -76,15 +76,6 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_D6998F32508A4F1A9A5C97A193DB9620 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7C70091DF417438F975E03B0B18F5B2F }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8B5AAA09C99F4FD385F68B8FF7D8C901 }}
-
-      - name: mkdir
-        run: |
-          mkdir -p /home/tomcat/lib
-          mkdir -p /home/site/libs
-          mkdir -p /usr/local/appservice/jdbc/azure-identity
-          mkdir -p /usr/local/appservice/jdbc/mysql
-          mkdir -p /usr/local/appservice/jdbc/postgresql
-          mkdir -p /usr/local/appservice/jdbc/sqlserver
       
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
