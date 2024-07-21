@@ -68,6 +68,9 @@ public class IdeaDto {
         this.valueProposition2 = valueProposition2;
     }
 
+    public IdeaDto() {
+    }
+
     public String getIdeaName() {
         return ideaName;
     }

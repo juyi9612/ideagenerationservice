@@ -12,6 +12,9 @@ import com.azure.spring.data.cosmos.repository.Query;
 // <repository_implementation>
 @Repository
 public interface IdeaRepository extends CosmosRepository<IdeaEntity, String> {
-    @Query("SELECT * FROM Ideas p WHERE p.Category = @category")
-    List<IdeaEntity> getIdeasByCategory(@Param("category") String category);
+    // @Query("SELECT p.id FROM Ideas p WHERE p.domain = @domain")
+    // List<String> getIdeasIdsByDomain(@Param("domain") String domain);
+
+    @Query("SELECT * FROM Ideas p WHERE p.ids in @ids")
+    List<IdeaEntity> getIdeasByIds(@Param("ids") List<String> ids);
 }
