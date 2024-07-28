@@ -15,6 +15,6 @@ public interface IdeaRepository extends CosmosRepository<IdeaEntity, String> {
     // @Query("SELECT p.id FROM Ideas p WHERE p.domain = @domain")
     // List<String> getIdeasIdsByDomain(@Param("domain") String domain);
 
-    @Query("SELECT * FROM Ideas p WHERE p.ids in @ids")
+    @Query("SELECT * FROM Ideas p WHERE Array_Contains(@ids, p.id)")
     List<IdeaEntity> getIdeasByIds(@Param("ids") List<String> ids);
 }
