@@ -33,6 +33,8 @@ jobs:
           echo "cosmosdb.uri=$COSMOSDB_URI" >> src/main/resources/application-prod.properties
           echo "cosmosdb.key=$COSMOSDB_KEY" >> src/main/resources/application-prod.properties
           echo "cosmosdb.databasename=$COSMOSDB_NAME" >> src/main/resources/application-prod.properties
+          echo "blob.storage.posters.constr=$BLOB_POSTERS_CONSTR" >> src/main/resources/application-prod.properties
+          
           echo "okta:" >> src/main/resources/application-prod.yml
           echo "  oauth2:" >> src/main/resources/application-prod.yml
           echo "    issuer: $AUTH0_ISSUER" >> src/main/resources/application-prod.yml
