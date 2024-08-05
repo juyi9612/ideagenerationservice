@@ -4,7 +4,7 @@ import com.azure.spring.data.cosmos.core.mapping.Container;
 
 import java.util.Date;
 
-@Container(containerName = "Articles", autoCreateContainer = false)
+@Container(containerName = "Articles", autoCreateContainer = true)
 public class ArticleEntity {
     private String id;
     private String title;
@@ -14,17 +14,20 @@ public class ArticleEntity {
     private String revenue;
     private boolean isUsed;
     private Date usedTime;
+    private Date createDateTime;
 
     public ArticleEntity() {
+
     }
 
-    public ArticleEntity(Date usedTime, String id, String revenue, String founder, String company, String content, String title, boolean isUsed) {
+    public ArticleEntity(Date usedTime, String id, String revenue, String founder, String company, String content, String title, boolean isUsed, Date createDateTime) {
         this.id = id;
         this.revenue = revenue;
         this.founder = founder;
         this.company = company;
         this.content = content;
         this.title = title;
+        this.createDateTime = createDateTime;
     }
 
     public boolean isUsed() {
@@ -89,5 +92,13 @@ public class ArticleEntity {
 
     public void setRevenue(String revenue) {
         this.revenue = revenue;
+    }
+
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }

@@ -2,14 +2,16 @@ package com.aifound.ideagenerationservice.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.aifound.ideagenerationservice.entity.RedBookEntity;
+import com.aifound.ideagenerationservice.model.RPARedBookDto;
 import com.aifound.ideagenerationservice.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.aifound.ideagenerationservice.annotation.DefaultErrorController;
 import com.aifound.ideagenerationservice.controller.request.GetIdeasRequest;
 import com.aifound.ideagenerationservice.model.IdeaDto;
@@ -31,36 +33,48 @@ public class IdeaGenerationController {
 
     @GetMapping("test")
 	public void test() throws Exception {
-        // JSON data
-        // 二进制数据数组
-        int[] imageData = {
-                137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82, 0, 0, 0, 200, 0, 0, 0, 200, 8, 6, 0, 0, 0, 173, 88, 174, 158, 0, 0, 0, 6, 98, 75, 71, 68, 0, 255, 0, 255, 0, 255, 160, 189, 167, 147, 0, 0, 1, 119, 73, 68, 65, 84, 120, 156, 237, 211, 177, 13, 128, 48, 0, 3, 193, 132, 253, 119, 14, 45, 213, 23, 8, 20, 132, 238, 38, 112, 225, 31, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 184, 111, 238, 30, 240, 152, 181, 214, 238, 9, 92, 204, 249, 139, 111, 29, 187, 7, 192, 151, 9, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 32, 8, 4, 130, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 201, 9, 68, 146, 3, 200, 32, 60, 75, 82, 0, 0, 0, 0, 73, 69, 78, 68, 174, 66, 96, 130
-        };
-
-        // 将 int 数组转换为 byte 数组
-        byte[] byteArray = new byte[imageData.length];
-        for (int i = 0; i < imageData.length; i++) {
-            byteArray[i] = (byte) imageData[i];
-        }
-
-        // 写入图像文件
-        try (FileOutputStream fos = new FileOutputStream("output_image.png")) {
-            fos.write(byteArray);
-            System.out.println("图像文件已成功生成");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 	}
     
-    @GetMapping("api/v1/ideas")
-	public List<IdeaDto> getIdeas(@RequestBody GetIdeasRequest request) throws Exception {
-        List<IdeaDto> dtos = this.ideaService.getIdeasByDomain(request.getDomains(), request.getIdeaCount());
-		return dtos;
-	}
+//    @GetMapping("api/v1/ideas")
+//	public List<IdeaDto> getIdeas(@RequestBody GetIdeasRequest request) throws Exception {
+//        List<IdeaDto> dtos = this.ideaService.getIdeasByDomain(request.getDomains(), request.getIdeaCount());
+//		return dtos;
+//	}
+//
+//    @GetMapping("api/v1/cook/articles")
+//    public void cookArticles() throws Exception {
+//        this.articleService.preCookArticles();
+//    }
+//
+//    @GetMapping("api/v1/cook/redbook")
+//    public void cookRedBooks(@RequestParam int count) throws Exception {
+//        if (count < 1 || count > 100) {
+//            throw new Exception("Invalid input: [count].");
+//        }
+//        this.articleService.preCookRedBookContent(count);
+//    }
 
-    @GetMapping("api/v1/articles")
-    public void cookArticles() throws Exception {
-        this.articleService.PreCookArticles();
+    @GetMapping("api/v1/redbook/mock")
+    public RPARedBookDto rpaRedBook() throws Exception {
+        List<String> images = new ArrayList<>();
+        images.add("https://posters.blob.core.windows.net/posters/b6a558cc-3cc4-4768-b057-6c85af6478f1_1.png?sp=r&st=2024-08-04T12:50:14Z&se=2025-04-30T20:50:14Z&sv=2022-11-02&sr=c&sig=ECAXSu%2BW32rDJMHaOrh7rzY6dUvsISy2wp1iC52mTi8%3D");
+        images.add("https://posters.blob.core.windows.net/posters/b6a558cc-3cc4-4768-b057-6c85af6478f1_2.png?sp=r&st=2024-08-04T12:50:14Z&se=2025-04-30T20:50:14Z&sv=2022-11-02&sr=c&sig=ECAXSu%2BW32rDJMHaOrh7rzY6dUvsISy2wp1iC52mTi8%3D");
+        images.add("https://posters.blob.core.windows.net/posters/b6a558cc-3cc4-4768-b057-6c85af6478f1_3.png?sp=r&st=2024-08-04T12:50:14Z&se=2025-04-30T20:50:14Z&sv=2022-11-02&sr=c&sig=ECAXSu%2BW32rDJMHaOrh7rzY6dUvsISy2wp1iC52mTi8%3D");
+        images.add("https://posters.blob.core.windows.net/posters/b6a558cc-3cc4-4768-b057-6c85af6478f1_4.png?sp=r&st=2024-08-04T12:50:14Z&se=2025-04-30T20:50:14Z&sv=2022-11-02&sr=c&sig=ECAXSu%2BW32rDJMHaOrh7rzY6dUvsISy2wp1iC52mTi8%3D");
+        String pi = "我开发了几个产品，其中最成功的是TalkNotes，一款AI语音笔记应用。它通过月订阅的方式获利。其他产品包括Sales Popup，这是一款显示销售通知以提高转化率的工具，以及Maker Ads Guide，这是一本关于Facebook广告的指南。";
+        String hi = "我是Nicolas Jeanne，曾经从事银行工作，但三天后就辞职了，因为我无法忍受被人指挥。我转向电子商务，然后接触到了广告，最后成为了一名独立开发者。";
+        String sl = "1. 从非技术背景转向独立开发 /n 2. 锁在酒店房间里学习编程 /n 3. 通过广告经验推动产品成长";
+        String gtm = "1. 利用在线目录进行早期验证 /n 2. 通过SEO获取长期流量 /n 3. 在Product Hunt上进行产品发布，积累初始用户";
+        String ln = "1. 找到了有效的广告转化方式 /n 2. 学会了如何快速验证产品创意 /n 3. 深入研究了文案写作技巧并应用于广告";
+        RPARedBookDto dto = new RPARedBookDto(
+                "北美独立开发者11个月赚20万美金\uD83D\uDCB8",
+                String.format("%s``%s``%s``%s``%s",
+                        pi, hi, sl, gtm, ln),
+                "广告优化 /n AI语音笔记 /n 独立开发",
+                images
+        );
+
+        return dto;
     }
 
 	// @GetMapping("api/v1/user")

@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ArticleRepository extends CosmosRepository<ArticleEntity, String> {
-    @Query("SELECT * FROM Ideas p WHERE Array_Contains(@ids, p.id)")
-    List<ArticleEntity> getIdeasByIds(@Param("ids") List<String> ids);
+    @Query("SELECT top @batch * FROM p WHERE p.used = false")
+    List<ArticleEntity> getUnusedArticle(@Param("batch") int batch);
 }
