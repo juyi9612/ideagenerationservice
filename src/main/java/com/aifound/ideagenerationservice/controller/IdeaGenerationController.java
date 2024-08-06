@@ -63,14 +63,14 @@ public class IdeaGenerationController {
         images.add("https://posters.blob.core.windows.net/posters/b6a558cc-3cc4-4768-b057-6c85af6478f1_4.png?sp=r&st=2024-08-04T12:50:14Z&se=2025-04-30T20:50:14Z&sv=2022-11-02&sr=c&sig=ECAXSu%2BW32rDJMHaOrh7rzY6dUvsISy2wp1iC52mTi8%3D");
         String pi = "我开发了几个产品，其中最成功的是TalkNotes，一款AI语音笔记应用。它通过月订阅的方式获利。其他产品包括Sales Popup，这是一款显示销售通知以提高转化率的工具，以及Maker Ads Guide，这是一本关于Facebook广告的指南。";
         String hi = "我是Nicolas Jeanne，曾经从事银行工作，但三天后就辞职了，因为我无法忍受被人指挥。我转向电子商务，然后接触到了广告，最后成为了一名独立开发者。";
-        String sl = "1. 从非技术背景转向独立开发 /n 2. 锁在酒店房间里学习编程 /n 3. 通过广告经验推动产品成长";
-        String gtm = "1. 利用在线目录进行早期验证 /n 2. 通过SEO获取长期流量 /n 3. 在Product Hunt上进行产品发布，积累初始用户";
-        String ln = "1. 找到了有效的广告转化方式 /n 2. 学会了如何快速验证产品创意 /n 3. 深入研究了文案写作技巧并应用于广告";
+        String sl = "1. 从非技术背景转向独立开发 \n 2. 锁在酒店房间里学习编程 \n 3. 通过广告经验推动产品成长";
+        String gtm = "1. 利用在线目录进行早期验证 \n 2. 通过SEO获取长期流量 \n 3. 在Product Hunt上进行产品发布，积累初始用户";
+        String ln = "1. 找到了有效的广告转化方式 \n 2. 学会了如何快速验证产品创意 \n 3. 深入研究了文案写作技巧并应用于广告";
         RPARedBookDto dto = new RPARedBookDto(
                 "北美独立开发者11个月赚20万美金\uD83D\uDCB8",
-                String.format("%s``%s``%s``%s``%s",
+                String.format("Founder\n%s\n\nIdea\n%s\n\nThe story\n%s\n\nGo to market\n%s\n\nLearnning\n%s",
                         pi, hi, sl, gtm, ln),
-                "广告优化 /n AI语音笔记 /n 独立开发",
+                "广告优化\nAI语音笔记\n独立开发",
                 images
         );
 
